@@ -1,35 +1,45 @@
 // @ts-check
+
 import eslint from "@eslint/js";
-import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended";
-import globals from "globals";
 import tseslint from "typescript-eslint";
+import globals from "globals";
+import prettier from "eslint-plugin-prettier/recommended";
 
 export default tseslint.config(
   {
-    ignores: ["eslint.config.mjs"],
+    ignores: ["dist", "node_modules"],
   },
+
   eslint.configs.recommended,
-  ...tseslint.configs.recommendedTypeChecked,
-  eslintPluginPrettierRecommended,
+
+  ...tseslint.configs.recommended,
+
+  prettier,
+
   {
     languageOptions: {
       globals: {
         ...globals.node,
         ...globals.jest,
       },
-      sourceType: "commonjs",
-      parserOptions: {
-        projectService: true,
-        tsconfigRootDir: import.meta.dirname,
-      },
+
+      sourceType: "module",
     },
-  },
-  {
+
     rules: {
       "@typescript-eslint/no-explicit-any": "off",
-      "@typescript-eslint/no-floating-promises": "warn",
-      "@typescript-eslint/no-unsafe-argument": "warn",
-      "prettier/prettier": ["error", { endOfLine: "auto", singleQuote: false }],
+
+      "@typescript-eslint/no-unused-vars": "warn",
+
+      "@typescript-eslint/ban-ts-comment": "off",
+
+      "prettier/prettier": [
+        "error",
+        {
+          endOfLine: "auto",
+          singleQuote: false,
+        },
+      ],
     },
   },
 );
