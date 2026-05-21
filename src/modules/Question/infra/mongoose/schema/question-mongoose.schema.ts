@@ -4,8 +4,6 @@ import { HydratedDocument } from "mongoose";
 
 import { AbstractDocument } from "src/common/repositories/schema/abstract.schema";
 
-export type QuestionSchemaDocument = HydratedDocument<QuestionDocument>;
-
 export enum Difficulty {
   EASY = "easy",
   MEDIUM = "medium",
@@ -100,5 +98,7 @@ export class QuestionDocument extends AbstractDocument {
   })
   isActive!: boolean;
 }
+
+export type QuestionSchemaDocument = HydratedDocument<QuestionDocument>;
 
 export const QuestionSchema = SchemaFactory.createForClass(QuestionDocument);
