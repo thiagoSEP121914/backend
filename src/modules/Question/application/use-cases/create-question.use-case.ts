@@ -15,7 +15,7 @@ export class CreateQuestionUseCase {
       ...dto,
       isActive: dto.isActive ?? true,
     } as Question);
-    
+
     return this.questionRepository.insert(question);
   }
 }
